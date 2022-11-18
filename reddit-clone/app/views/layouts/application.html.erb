@@ -11,13 +11,34 @@
   </head>
 
   <body>
-    <%= yield %>
+    <ul>
+    
+    <% if logged_in? %>
+      <li><%= current_user.username %></li>
+      <li><a href="<%= new_sub_url %>">Create a Sub!</a></li>
+      <li><a href="<%= subs_url %>">All Subs!</a></li>
+      <form action="<%= session_url %>" method="POST">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+        <input type="hidden" name="_method" value="DELETE" >
+        <li>
+          <button>Logout</button>
+        </li>
+      </form>
+    <% else %>
+      <li><a href="<%= subs_url %>">All Subs!</a></li>
+      <li><a href="<%= new_session_url %>">Log In!</a></li>
+    <% end %>
+    </ul>
 
     <% if flash[:errors] %>
       <% flash[:errors].each do |error| %>
           <%= error %>
       <% end %>
     <% end %>
+    
+    <%= yield %>
+
+    
 
   </body>
 
