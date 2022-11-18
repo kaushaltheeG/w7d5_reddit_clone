@@ -1,0 +1,26 @@
+<% subs = Sub.all %>
+<% subs_with_post = @post.subs.pluck(:id) %>
+
+<h2>Make a New Post</h2>
+
+<form action="<%= posts_url %>" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+    <label>Title
+        <input type="text" name="post[title]" value="<%= @post.title %>">
+    </label>
+    <label>URL
+        <input type="text" name="post[url]" value="<%= @post.url %>">
+    </label>
+    <label>Content
+        <textarea name="post[content]" stle="width: 646px; height: 203px;"><%= @post.content %></textarea>
+    </label>
+    <input type="hidden" name="post[sub_ids][]" value="">
+    
+    <% subs.each do |sub| %>
+        <label><%= sub.title %>
+            <input type="checkbox" name="post[sub_ids][]" value="<%= sub.id %>" <%= "checked" if subs_with_post.include?(sub.id) %>>
+        </label>
+    <% end %>
+    
+    <button>Create new post</button>
+</form>

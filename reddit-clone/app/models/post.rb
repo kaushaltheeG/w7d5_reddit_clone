@@ -11,7 +11,7 @@
 #  updated_at :datetime         not null
 #
 class Post < ApplicationRecord
-    validates :title, :sub_id, :author_id, presence: true
+    validates :title, :author_id, presence: true
 
     has_many :post_subs, 
         foreign_key: :post_id, 
