@@ -21,6 +21,15 @@ class Post < ApplicationRecord
     has_many :subs,
         through: :post_subs,
         source: :sub 
+
+    has_many :comments,
+        foreign_key: :post_id,
+        class_name: :Comment,
+        dependent: :destroy
+    
+    has_many :users_with_comments,
+        through: :comments,
+        source: :author
     
     belongs_to :author,
         foreign_key: :author_id,

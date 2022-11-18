@@ -11,3 +11,13 @@
     <a href="<%= edit_post_url(@post) %>">Edit Post</a>
 <% end %>
 
+
+<a href="<%= new_post_comment(@post) %>">Add a Comment</a>
+<ul>
+    <% @post.comments.each do |comment| %>
+            <li><%= comment.body %></li>
+            <br>
+            <li>By <%= comment.author.username %></li>
+    <% end %>
+</ul>
+
